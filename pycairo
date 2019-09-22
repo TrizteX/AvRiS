@@ -1,0 +1,30 @@
+import cairo
+import math
+import random
+surface = cairo.ImageSurface(cairo.FORMAT_RGB24, 640, 480)
+ctx = cairo.Context(surface)
+ctx.rectangle(0, 0, 640,480)
+ctx.set_source_rgb(1, 1, 1)
+ctx.fill()
+ctx.stroke()
+
+for i in range(10):
+    color_r=random.random()
+    color_g=random.random()
+    color_b=random.random()
+    x=random.randint(0,480)
+    y=random.randint(0,640)
+    diam=random.randint(5,15)
+
+    xf=max(0+diam,(min(x,640-diam)))
+    yf=max(0+diam,(min(y,480-diam)))
+
+
+    ctx.arc(xf, yf, diam, 0, 2*math.pi)
+    ctx.set_source_rgb(color_r,color_g, color_b)
+    ctx.fill()
+    ctx.stroke()
+    print(x,y)
+    print(diam)
+    print(color_r,color_g,color_b)
+surface.write_to_png('rectangle.png')
