@@ -216,7 +216,7 @@ def run(cores):
     generation = 1 #counter for generation, for printing every 100 gens 
     parent = Organism(tg.size,INITIAL_GENES) #calling Organism class, and passing the target size and initial gene pool size as params
     
-
+    p = multiprocessing.Pool(cores)
     
     score=fitness(tg,parent.drawImage())
 
@@ -229,7 +229,7 @@ def run(cores):
             parent.drawImage().save(os.path.join("Solutions","{}.jpeg".format(generation)))
             
         generation += 1
-        p = multiprocessing.Pool(cores)
+        
         
         """
         This is where the genetic algo really starts.
@@ -282,7 +282,7 @@ def run(cores):
 
         #this is becuase at one point, too many files are open, since we are opening a pool inside a loop, then not shutting it down
 
-        p.terminate()
+        
 
 
 if __name__ == "__main__":
