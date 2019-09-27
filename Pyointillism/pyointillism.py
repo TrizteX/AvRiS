@@ -8,7 +8,7 @@ from IPython.display import display
 
 
 POP_PER_GEN= 50 #number of canvases generated per round, i.e. generation
-MUTATION_CHANCE=0.4 #self explanatory`
+MUTATION_CHANCE=0.4 #self explanatory... this is a threshold, 
 ADD_GENE_CHANCE = 0.6 #again, pretty obvious... we should try tweaking with this value, maybe make it more to have a lot of genes, thus possibly increasing reso of image
 REM_GENE_CHANCE = 0.4 #and... maybe have this even lower
 INITIAL_GENES = 50 #obvious
@@ -134,7 +134,7 @@ class Organism:
 
         else:
             k = MUTATION_CHANCE*int(len(self.genes))
-            for g in random.sample(self.genes,k):  #int(k)
+            for g in random.sample(self.genes,int(k)):  #int(k)
                 g.mutate()
 
         #To add random gene
@@ -194,7 +194,7 @@ def groupMutate(o,number,p):
     """
     Mutates and tests a number of organisms using the multiprocessing module.
     """
-    results = p.map(mutateAndTest,[o]*number)
+    results = p.map(mutateAndTest,[o]*int(number))
     return results
 
 """
